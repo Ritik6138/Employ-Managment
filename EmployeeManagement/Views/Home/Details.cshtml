@@ -1,0 +1,22 @@
+﻿@model EmployeeViewModel
+
+<div class="text-center">
+
+    <div class="card" style="width: 18rem;">
+        @*<img class="card-img-top" src=".../100px180/" alt="Card image cap">*@
+        <img class="card-img-top" src="~/images/BankImage.svg" alt="Card image cap" asp-append-version="true" />
+        <div class="card-body">
+            <h5 class="card-title">Employee</h5>
+            <p>Name: @Model.Name</p>
+            <p>Department: @Model.Department</p>
+            <p>Email: @Model.Email</p>
+
+
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Back</a>
+            <a asp-controller="Home" asp-action="Edit" class="btn btn-primary">Edit</a>
+            <a asp-controller="Home" asp-action="Delete" class="btn btn-primary">Delete</a>
+        </div>
+    </div>
+
+    
+    </div>
