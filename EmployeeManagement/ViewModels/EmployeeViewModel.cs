@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Models;
+using System;
 
 namespace EmployeeManagement.ViewModels
 {
@@ -8,5 +9,7 @@ namespace EmployeeManagement.ViewModels
         public string Name { get; set; }
         public string Email { get; set; }
         public Dept? Department { get; set; }
+        public DateTime HireDate { get; set; }
     }
+
 }

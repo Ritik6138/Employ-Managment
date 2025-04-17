@@ -1,0 +1,23 @@
+﻿@using EmpInfrastructure.Models
+@model List<BreadCumbItem>
+
+@if (Model != null && Model.Any())
+{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            @foreach (var crumb in Model)
+            {
+                <li class="breadcrumb-item @(crumb.Url == null ? "active" : "")" @(crumb.Url == null ? "aria-current=\"page\"" : "")>
+                    @if (!string.IsNullOrEmpty(crumb.Url))
+                    {
+                        <a href="@crumb.Url">@crumb.Tittle</a>
+                    }
+                    else
+                    {
+                        @crumb.Tittle
+                    }
+                </li>
+            }
+        </ol>
+    </nav>
+}

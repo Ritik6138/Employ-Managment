@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Dual Format API Demo";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+    var breadcrumbs = ViewBag.Breadcrumbs as List<EmpInfrastructure.Models.BreadCumbItem>;
+}
+
+<h2>Dual Format API Demo</h2>
+<div class="breadcrumbs-container">
+    @await Html.PartialAsync("_BreadCrumbs", breadcrumbs)
+</div>
+<p>
+    Click one of the buttons below to fetch employee data in the chosen format.
+</p>
+
+<div style="margin-bottom:20px;">
+    <button id="btnJson" class="btn btn-primary">Get JSON Data</button>
+    <button id="btnXml" class="btn btn-secondary">Get XML Data</button>
+</div>
+
+<div>
+    <h3>Response:</h3>
+    <pre id="responseArea" style="background: #f8f9fa; padding: 10px; border:1px solid #ccc;"></pre>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            function formatXml(xml) {
+                var reg = /(>)(<)(\/*)/g;
+                var xmlFormatted = xml.replace(reg, '$1\n$2$3');
+                var pad = 0;
+                var formatted = "";
+                xmlFormatted.split('\n').forEach(function (node) {
+                    var indent = 0;
+                    if (node.match(/^<\/\w/)) {
+                        if (pad !== 0) pad -= 1;
+                    }
+                    else if (node.match(/^<\w[^>]*[^\/]>.*$/)) {
+                        indent = 1;
+                    }
+                    var padding = new Array(pad + 1).join("  ");
+                    formatted += padding + node + "\n";
+                    pad += indent;
+                });
+                return formatted;
+            }
+            $(document).ready(function () {
+                $("#btnXml").click(function () {
+                    $.ajax({
+                        url: '@Url.Content("~/api/employeesapi")',
+                        type: 'GET',
+                        dataType: 'xml',
+                        headers: {
+                            Accept: 'application/xml'
+                        },
+                        success: function (data) {
+                            var xmlString = new XMLSerializer().serializeToString(data);
+                            var formattedXml = formatXml(xmlString);
+                            $("#responseArea").text(formattedXml);
+                        },
+                        error: function (xhr, status, error) {
+                            $("#responseArea").text("Error fetching XML: " + error);
+                        }
+                    });
+                });
+
+                $("#btnJson").click(function () {
+                    $.ajax({
+                        url: '@Url.Content("~/api/employeesapi")',
+                        type: 'GET',
+                        dataType: 'json',
+                        headers: {
+                            Accept: 'application/json'
+                        },
+                        success: function (data) {
+                            $("#responseArea").text(JSON.stringify(data, null, 2));
+                        },
+                        error: function (xhr, status, error) {
+                            $("#responseArea").text("Error fetching JSON: " + error);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+}

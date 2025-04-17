@@ -1,0 +1,74 @@
+﻿@model EmployeeManagement.ViewModels.EmployeeViewModel
+
+@{
+    ViewBag.Title = "Add New Employee";
+    var breadcrumbs = ViewBag.Breadcrumbs as List<EmpInfrastructure.Models.BreadCumbItem>;
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h4>@ViewBag.Title</h4>
+        </div>
+        <div class="breadcrumbs-container">
+            @await Html.PartialAsync("_BreadCrumbs", breadcrumbs)
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" required type="email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Department" class="control-label"></label>
+                    <select asp-for="Department" class="form-control" asp-items="ViewBag.Departments">
+                        <option value="">-- Select Department --</option>
+                    </select>
+                    <span asp-validation-for="Department" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HireDate" class="control-label"></label>
+                    <input asp-for="HireDate" class="form-control" type="date" required />
+                    <span asp-validation-for="HireDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i> Create
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+}

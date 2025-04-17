@@ -1,0 +1,67 @@
+﻿@model IEnumerable<EmployeeViewModel>
+
+ <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParam"]">
+                                        Name
+                                @if (ViewData["NameSortParam"]?.ToString() == "name_desc")
+                                {
+                                                <i class="fa fa-sort-down"></i>
+                                }
+                                else
+                                {
+                                                <i class="fa fa-sort-up"></i>
+                                }
+                                    </a>
+                                </th>
+                                <th>Department</th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParam"]">
+                                        Hire Date
+                                @if (ViewData["DateSortParam"]?.ToString() == "date_desc")
+                                {
+                                                <i class="fa fa-sort-down"></i>
+                                }
+                                else
+                                {
+                                                <i class="fa fa-sort-up"></i>
+                                }
+                                    </a>
+                                </th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    @foreach (var item in Model)
+                    {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Department)</td>
+                                        <td>@item.HireDate.ToString("dd MMM yyyy")</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">
+                                                    <i class="fa fa-edit"></i> Edit
+                                                </a>
+                                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">
+                                                    <i class="fa fa-info-circle"></i> Details
+                                                </a>
+                                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">
+                                                    <i class="fa fa-trash"></i> Delete
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                    }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>

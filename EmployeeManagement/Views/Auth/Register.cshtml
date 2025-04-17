@@ -1,0 +1,44 @@
+﻿@model RegisterViewModel
+
+<div class="auth-container">
+    <h2 class="text-center">Create Account</h2>
+    <form asp-action="Register" method="post" class="needs-validation" novalidate>
+        <!-- Username Field -->
+        <div class="form-group">
+            <label asp-for="Username" class="form-label">Username</label>
+            <input asp-for="Username" class="form-control" placeholder="Enter your username" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+            <label asp-for="Email" class="form-label">Email Address</label>
+            <input asp-for="Email" type="email" class="form-control" placeholder="Enter your email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+            <label asp-for="Password" class="form-label">Password</label>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="form-group">
+            <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Re-enter your password" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100 mt-3">Register</button>
+    </form>
+
+    <div class="mt-4 text-center">
+        <p>
+            Already have an account?
+            <a asp-controller="Auth" asp-action="Login" class="btn-link">Login here</a>
+        </p>
+    </div>
+</div>

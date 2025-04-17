@@ -1,5 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -71,98 +72,156 @@ body {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
 }
-
-pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 4px;
-    border: 1px solid #dee2e6;
-    max-height: 500px;
-    overflow-y: auto;
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --success-color: #06d6a0;
+    --info-color: #4cc9f0;
+    --warning-color: #ffd60a;
+    --danger-color: #ef233c;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
 }
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 .card {
-    transition: transform 0.2s;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
 }
 
     .card:hover {
-        transform: translateY(-2px);
+        transform: translateY(-5px);
     }
 
-.table-hover tbody tr:hover {
-    background-color: rgba(0,123,255,0.05);
+.summary-card {
+    border-left: 4px solid;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.pre-scrollable {
-    max-height: 300px;
-    overflow-y: scroll;
-}
-.fa-fw {
-    width: 1.25em;
-    text-align: center;
+    .summary-card.bg-primary {
+        border-color: var(--primary-color);
+    }
+
+    .summary-card.bg-success {
+        border-color: var(--success-color);
+    }
+
+    .summary-card.bg-warning {
+        border-color: var(--warning-color);
+    }
+
+    .summary-card.bg-danger {
+        border-color: var(--danger-color);
+    }
+
+.card-header {
+    background: white;
+    border-bottom: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 1.5rem;
 }
 
-/* Button icon spacing */
-.btn i {
-    margin-right: 0.35rem;
+.chart-card {
+    background: linear-gradient(45deg, #ffffff, #f8f9fa);
 }
 
-
-/* Table header icons */
-th i {
-    min-width: 1.5em;
+.table {
+    border-radius: 10px;
+    overflow: hidden;
 }
-.hover-shadow:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+    .table thead th {
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+.btn-export {
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: 500;
     transition: all 0.3s ease;
 }
 
-.table-hover tbody tr:hover {
-    background-color: #f8f9fa;
+    .btn-export:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+:root {
+    --primary: #4361ee;
+    --primary-hover: #3f37c9;
+    --secondary: #6c757d;
+    --success: #06d6a0;
+    --info: #4cc9f0;
+    --warning: #ffd60a;
+    --danger: #ef233c;
+    --light: #f8f9fa;
+    --dark: #212529;
 }
 
-.card {
+.summary-card {
+    border: none;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-scale:hover {
+    transform: translateY(-5px);
+}
+
+.gradient-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+    color: white;
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+}
+
+.btn-action {
+    padding: 1rem 1.5rem;
     border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    text-align: left;
 }
 
-.btn {
-    border-radius: 0.5rem;
+    .btn-action:hover {
+        transform: translateX(5px);
+        box-shadow: 0 10px 20px -10px rgba(var(--primary), 0.4);
+    }
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+}
+
+.table-hover tbody tr {
     transition: all 0.2s ease;
 }
 
-pre {
-    font-size: 0.875rem;
-    line-height: 1.6;
-    white-space: pre-wrap;
-}
-.toast {
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth animations */
-}
-
-    .toast.fade {
-        transform: translateY(20px);
-        opacity: 0; /* Initial fade-in */
+    .table-hover tbody tr:hover {
+        background-color: rgba(var(--primary), 0.03);
+        transform: translateX(4px);
     }
 
-        .toast.fade.show {
-            transform: translateY(0);
-            opacity: 1; /* Visible state */
-        }
-
-.toast-close-btn {
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border: none;
-    background: transparent;
-    margin-right: 10px;
-    cursor: pointer;
+.status-badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
 }
 
-.toast-header {
-    background: #333; /* Customizable background color */
+.bg-active {
+    background-color: rgba(var(--success), 0.1);
+    color: var(--success);
 }

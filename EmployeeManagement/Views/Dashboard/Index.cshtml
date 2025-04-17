@@ -1,0 +1,219 @@
+﻿@{
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+    var breadcrumbs = ViewBag.Breadcrumbs as List<EmpInfrastructure.Models.BreadCumbItem>;
+}
+<div class="dashboard-container">
+    <!-- Header -->
+    <header class="dashboard-header">
+        <h1 class="header-title">Employee Dashboard</h1>
+        <div class="header-actions">
+            <button class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Employee
+            </button>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs placed outside the header -->
+    <div class="breadcrumbs-container">
+        @await Html.PartialAsync("_BreadCrumbs", breadcrumbs)
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-content">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-text">
+                    <h3 id="totalEmployees"></h3>
+                    <p>Total Employees</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-content">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-text">
+                    <h3 id="recentHires">0</h3>
+                    <p>Recent Hires</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-content">
+                <div class="stat-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="stat-text">
+                    <h3 id="totalDepartments">0</h3>
+                    <p>Departments</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-content">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-text">
+                    <h3 id="pendingTasks">0</h3>
+                    <p>Pending Requests</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-grid">
+        <!-- Left Column -->
+        <div class="left-column">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">Employee Distribution</h3>
+                    <select class="chart-filter">
+                        <option>Last 30 Days</option>
+                        <option>Last Year</option>
+                    </select>
+                </div>
+                <canvas id="departmentChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+            <div class="activity-card">
+                <h3 class="chart-title mb-4">Recent Activity</h3>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-info">
+                            <div class="activity-name">-- Not Activity ----</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-column">
+            <div class="activity-card">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        API Integration Demo
+                    </div>
+                    <div class="card-body">
+                        <p>See how our employee data is delivered in both JSON and XML formats using content negotiation.</p>
+                        <a class="btn btn-info" href="@Url.Action("Index", "XmlAndJson")">View API Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-header bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Recent Hires</h5>
+                <a asp-area="" asp-controller="Employee" asp-action="Index" class="btn btn-link text-primary">View All</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Hire Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentEmployeesTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '@Url.Action("GetSummaryData", "DashBoard")',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#totalEmployees').text(data.totalEmployees);
+                    $('#totalDepartments').text(data.totalDepartments);
+                    $('#recentHires').text(data.recentHires);
+                    $('#pendingTasks').text(data.pendingTasks);
+                    var recentEmployeesHtml = '';
+                    $.each(data.recentEmployees, function (index, emp) {
+                        var hireDate = moment(emp.HireDate).format("DD MMM YYYY");
+                        recentEmployeesHtml += "<tr><td>" + emp.name + "</td><td>" + emp.department + "</td><td>" + hireDate + "</td><td>" + emp.email + "</td></tr>";
+                    });
+                    $('#recentEmployeesTable').html(recentEmployeesHtml);
+                },
+                error: function () {
+                    console.error("Error loading summary data.");
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetHeadcountByDepartment", "DashBoard")',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var backgroundColors = [
+                        'rgba(99, 102, 241, 0.8)',  // Engineering (or HR, etc.)
+                        'rgba(79, 70, 229, 0.8)',   // Marketing, e.g.
+                        'rgba(16, 185, 129, 0.8)',   // Sales
+                        'rgba(245, 158, 11, 0.8)'    // Finance
+                    ];
+
+                    var borderColors = [
+                        'rgb(99, 102, 241)',
+                        'rgb(79, 70, 229)',
+                        'rgb(16, 185, 129)',
+                        'rgb(245, 158, 11)'
+                    ];
+                    console.log(data);
+                    var deptCount = data.labels.length;
+                    var bgColors = backgroundColors.slice(0, deptCount);
+                    var bColors = borderColors.slice(0, deptCount);
+                    const departmentCtx = document.getElementById('departmentChart').getContext('2d');
+                    new Chart(departmentCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.labels,  // e.g. ["HR", "IT", "Sales", "Finance"]
+                            datasets: [{
+                                label: 'Employees',
+                                data: data.counts, // Counts corresponding to each department
+                                backgroundColor: bgColors,
+                                borderColor: bColors,
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top'
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error retrieving department headcount data: ", error);
+                }
+            });
+        });
+    </script>
+}

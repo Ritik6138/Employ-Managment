@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Employee>
+﻿@* @model IEnumerable<Employee>
 <div class="text-center">
     <h1>Home</h1>
 
@@ -33,34 +33,13 @@
         </tbody>
     </table>
 
-  
+    
+
 </div>
 @section Scripts {
 
     <script src="~/js/Home.js"></script>
-    <script>
-    // Objective: Display list of records using AJAX call
-        $(document).ready(function () {
-            $('#loadUsers').click(function () {
-                $.get('/api/api/Users', function (data) {
-                    let html = '<ul class="list-group">';
-                    data.forEach(function (user) {
-                        html += `<li class="list-group-item">${user.name} (${user.email})</li>`;
-                    });
-                    html += '</ul>';
-                    $('#usersContainer').html(html);
-                }).fail(function () {
-                    alert('Failed to load users. Please check the endpoint.');
-                });
-            });
-        });
-        document.getElementById('load-soap').addEventListener('click', function () {
-            fetch('/api/api/soap')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('soap-content').textContent = data;
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    </script>
+   
+
 }
+ *@

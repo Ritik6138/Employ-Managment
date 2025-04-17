@@ -1,0 +1,43 @@
+﻿@model EmployeeManagement.ViewModels.EmployeeViewModel
+
+@{
+    ViewBag.Title = "Employee Details";
+    var breadcrumbs = ViewBag.Breadcrumbs as List<EmpInfrastructure.Models.BreadCumbItem>;
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h4>@ViewBag.Title</h4>
+        </div>
+        <div class="breadcrumbs-container">
+            @await Html.PartialAsync("_BreadCrumbs", breadcrumbs)
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Name:</dt>
+                <dd class="col-sm-9">@Model.Name</dd>
+
+                <dt class="col-sm-3">Department:</dt>
+                <dd class="col-sm-9">@Model.Department</dd>
+
+
+                <dt class="col-sm-3">Email:</dt>
+                <dd class="col-sm-9">@Model.Email</dd>
+
+                <dt class="col-sm-3">Hire Date:</dt>
+                <dd class="col-sm-9">@Model.HireDate.ToString("dd MMMM yyyy")</dd>
+
+                <dt class="col-sm-3">Employment Duration:</dt>
+                <dd class="col-sm-9">@((DateTime.Now - Model.HireDate).Days / 365) years</dd>
+            </dl>
+
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                    <i class="fa fa-edit"></i> Edit
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

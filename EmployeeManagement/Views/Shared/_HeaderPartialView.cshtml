@@ -1,0 +1,50 @@
+﻿<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Dashboard" asp-action="Index">
+                <img src="~/images/sampleBrandImageSmall.jpg" height="30" width="22" alt="Brand Logo" />
+                Employee Management
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Employee" asp-action="Index">Employee Directory</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Employee" asp-action="Create">Add Employee</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                @User.Identity.Name
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
