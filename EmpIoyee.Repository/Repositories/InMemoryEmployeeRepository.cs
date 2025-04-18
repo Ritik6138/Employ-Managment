@@ -1,41 +1,39 @@
-﻿using EmpInfrastructure.Interfaces;
-using EmpInfrastructure.Models;
-using System;
+﻿using Employee.Repository.Interfaces;
+using Employee.Repository.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
 
-namespace EmpInfrastructure.Repositories
+namespace Employee.Repository.Repositories
 {
     public class InMemoryEmployeeRepository : IEmployeeRepository
     {
-        private readonly List<Employee> _employees = new List<Employee>()
+        private readonly List<Employes> _employees = new List<Employes>()
         {
-            new Employee { Id = 1, Name = "Mark", Department = Dept.IT, Email = "Mark@hotmil.com" },
-            new Employee { Id = 2, Name = "Param", Department = Dept.IT, Email = "param@hotmil.com" },
-            new Employee { Id = 3, Name = "Tom", Department = Dept.HR, Email = "Tom@hotmil.com" }
+            new Employes { Id = 1, Name = "Mark", Department = Dept.IT, Email = "Mark@hotmil.com" },
+            new Employes { Id = 2, Name = "Param", Department = Dept.IT, Email = "param@hotmil.com" },
+            new Employes { Id = 3, Name = "Tom", Department = Dept.HR, Email = "Tom@hotmil.com" }
         };
         private int _nextId = 4; // Start with the next ID after the predefined data
 
-        public Task AddAsync(Employee employee)
+        public Task AddAsync(Employes employee)
         {
             employee.Id = Interlocked.Increment(ref _nextId); // Generate a unique ID
             _employees.Add(employee);
             return Task.CompletedTask;
         }
 
-        public Task<IEnumerable<Employee>> GetAllAsync() =>
+        public Task<IEnumerable<Employes>> GetAllAsync() =>
             Task.FromResult(_employees.AsEnumerable());
 
-        public Task<Employee> GetByIdAsync(int id)
+        public Task<Employes> GetByIdAsync(int id)
         {
             var employee = _employees.FirstOrDefault(e => e.Id == id);
             return Task.FromResult(employee);
         }
 
-        public Task UpdateAsync(Employee employee)
+        public Task UpdateAsync(Employes employee)
         {
             var existingEmployee = _employees.FirstOrDefault(e => e.Id == employee.Id);
             if (existingEmployee == null)

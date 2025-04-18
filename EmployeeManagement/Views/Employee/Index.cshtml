@@ -1,8 +1,9 @@
-﻿@model PaginatedList<EmployeeManagement.ViewModels.EmployeeViewModel>
+﻿@using Employee.Repository.Models
+@model PaginatedList<EmployeeManagement.ViewModels.EmployeeViewModel>
 
 @{
     ViewBag.Title = "Employee List";
-    var breadcrumbs = ViewBag.Breadcrumbs as List<EmpInfrastructure.Models.BreadCumbItem>;
+    var breadcrumbs = ViewBag.Breadcrumbs as List<BreadCumbItem>;
 }
 
 @if (TempData["SuccessMessage"] != null)

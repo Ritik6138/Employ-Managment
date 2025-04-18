@@ -1,7 +1,8 @@
-﻿@{
+﻿@using Employee.Repository.Models
+@{
     ViewBag.Title = "Dual Format API Demo";
     Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
-    var breadcrumbs = ViewBag.Breadcrumbs as List<EmpInfrastructure.Models.BreadCumbItem>;
+    var breadcrumbs = ViewBag.Breadcrumbs as List<BreadCumbItem>;
 }
 
 <h2>Dual Format API Demo</h2>

@@ -1,7 +1,8 @@
-﻿@model EmployeeManagement.ViewModels.EmployeeViewModel
+﻿@using Employee.Repository.Models
+@model EmployeeManagement.ViewModels.EmployeeViewModel
 @{
     ViewBag.Title = "Edit Employee";
-    var breadcrumbs = ViewBag.Breadcrumbs as List<EmpInfrastructure.Models.BreadCumbItem>;
+    var breadcrumbs = ViewBag.Breadcrumbs as List<BreadCumbItem>;
 }
 
 <div class="container mt-4">

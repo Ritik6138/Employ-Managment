@@ -1,7 +1,7 @@
-﻿using EmpInfrastructure.Models;
+﻿using Employee.Repository.Models;
 using System.Threading.Tasks;
 
-namespace EmpInfrastructure.Interfaces
+namespace Employee.Repository.Interfaces
 {
     public interface IAuthRepository
     {

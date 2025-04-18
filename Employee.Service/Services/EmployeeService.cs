@@ -1,13 +1,13 @@
-﻿using EmpInfrastructure.Interfaces;
-using EmpInfrastructure.Models;
-using EmployeeCore.Interfaces;
+﻿using Employee.Repository.Interfaces;
+using Employee.Repository.Models;
+using Employee.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmployeeCore.Services
+namespace Employee.Service.Services
 {
     public class EmployeeService : IEmployeeService
     {
@@ -18,13 +18,13 @@ namespace EmployeeCore.Services
             _repository = repository;
         }
 
-        public async Task<IEnumerable<Employee>> GetAllEmployeesAsync() =>
+        public async Task<IEnumerable<Employes>> GetAllEmployeesAsync() =>
             await _repository.GetAllAsync();
 
-        public async Task<Employee> GetEmployeeByIdAsync(int id) =>
+        public async Task<Employes> GetEmployeeByIdAsync(int id) =>
             await _repository.GetByIdAsync(id);
 
-        public async Task CreateEmployeeAsync(Employee employee)
+        public async Task CreateEmployeeAsync(Employes employee)
         {
             var validationContext = new ValidationContext(employee);
             Validator.ValidateObject(employee, validationContext, validateAllProperties: true);
@@ -33,7 +33,7 @@ namespace EmployeeCore.Services
             await _repository.AddAsync(employee);
         }
 
-        public async Task<bool> UpdateEmployeeAsync(Employee employee)
+        public async Task<bool> UpdateEmployeeAsync(Employes employee)
         {
             try
             {

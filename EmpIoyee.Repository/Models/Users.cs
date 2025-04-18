@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace EmpInfrastructure.Models
+namespace Employee.Repository.Models
 {
     public class User
     {

@@ -1,6 +1,5 @@
-﻿using EmpInfrastructure.Models;
-using EmployeeCore.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using Employee.Repository.Models;
+using Employee.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,7 +23,7 @@ namespace EmployeeManagement.Controllers
         /// <returns>List of Employee objects.</returns>
         [HttpGet]
         [Produces("application/json", "application/xml")]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<Employes>>> GetEmployees()
         {
             var employees = await _employeeService.GetAllEmployeesAsync();
             return Ok(employees);

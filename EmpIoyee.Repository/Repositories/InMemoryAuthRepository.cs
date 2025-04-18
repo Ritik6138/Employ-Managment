@@ -1,12 +1,12 @@
-﻿using EmpInfrastructure.Interfaces;
-using EmpInfrastructure.Models;
+﻿using Employee.Repository.Interfaces;
+using Employee.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace EmpInfrastructure.Repositories
+namespace Employee.Repository.Repositories
 {
     public class InMemoryAuthRepository : IAuthRepository
     {

@@ -1,10 +1,10 @@
-﻿using EmpInfrastructure.Models;
-using EmployeeCore.Interfaces;
+﻿using Employee.Repository.Models;
+using Employee.Service.Interfaces;
 using EmployeeManagement.ViewModels;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;

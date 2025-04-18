@@ -1,5 +1,5 @@
-﻿using EmpInfrastructure.Models;
-using EmployeeCore.Interfaces;
+﻿using Employee.Repository.Models;
+using Employee.Service.Interfaces;
 using EmployeeManagement.Models;
 using EmployeeManagement.Service;
 using EmployeeManagement.ViewModels;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Dept = EmpInfrastructure.Models.Dept;
+using Dept = Employee.Repository.Models.Dept;
 
 namespace EmployeeManagement.Controllers
 {
@@ -122,7 +122,7 @@ namespace EmployeeManagement.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var employee = new Employee
+                    var employee = new Employes
                     {
                         Name = viewModel.Name,
                         Email = viewModel.Email,
@@ -245,7 +245,7 @@ namespace EmployeeManagement.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var employee = new Employee
+                    var employee = new Employes
                     {
                         Id = viewModel.Id,
                         Name = viewModel.Name,
@@ -379,9 +379,9 @@ namespace EmployeeManagement.Controllers
             try
             {
                 var employees = await _employeeService.GetAllEmployeesAsync();
-                return Ok(new SoapEnvelope<Employee>
+                return Ok(new SoapEnvelope<Employes>
                 {
-                    Body = new SoapBody<Employee>
+                    Body = new SoapBody<Employes>
                     {
                         Items = employees.ToList()
                     }

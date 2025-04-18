@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EmpInfrastructure.Models
+namespace Employee.Repository.Models
 {
     public class DashboardSummaryDto
     {

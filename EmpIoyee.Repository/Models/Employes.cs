@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace EmpInfrastructure.Models
+namespace Employee.Repository.Models
 {
-    public class Employee
+    public class Employes
     {
         public int Id { get; set; }
 

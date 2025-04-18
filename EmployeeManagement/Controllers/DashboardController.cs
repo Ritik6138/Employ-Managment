@@ -1,4 +1,4 @@
-﻿using EmployeeCore.Interfaces;
+﻿using Employee.Service.Interfaces;
 using EmployeeManagement.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;

@@ -1,8 +1,8 @@
-using EmpInfrastructure.Interfaces;
-using EmpInfrastructure.Models;
-using EmpInfrastructure.Repositories;
-using EmployeeCore.Interfaces;
-using EmployeeCore.Services;
+using Employee.Repository.Interfaces;
+using Employee.Repository.Models;
+using Employee.Repository.Repositories;
+using Employee.Service.Interfaces;
+using Employee.Service.Services;
 using EmployeeManagement.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;

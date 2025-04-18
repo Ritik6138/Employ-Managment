@@ -1,9 +1,7 @@
-﻿using EmpInfrastructure.Models;
-using System;
+﻿using Employee.Repository.Models;
 using System.Collections.Generic;
-using System.Text;
 
-namespace EmployeeCore
+namespace Employee.Service
 {
     public class AuthResult
     {

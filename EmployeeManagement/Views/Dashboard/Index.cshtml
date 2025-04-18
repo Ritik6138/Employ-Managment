@@ -1,6 +1,7 @@
-﻿@{
+﻿@using Employee.Repository.Models
+@{
     Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
-    var breadcrumbs = ViewBag.Breadcrumbs as List<EmpInfrastructure.Models.BreadCumbItem>;
+    var breadcrumbs = ViewBag.Breadcrumbs as List<BreadCumbItem>;
 }
 <div class="dashboard-container">
     <!-- Header -->

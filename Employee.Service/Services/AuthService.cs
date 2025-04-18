@@ -1,10 +1,10 @@
-﻿using EmpInfrastructure.Interfaces;
-using EmpInfrastructure.Models;
-using EmployeeCore.Interfaces;
+﻿using Employee.Repository.Interfaces;
+using Employee.Repository.Models;
+using Employee.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using PasswordVerificationResultCore = Microsoft.AspNetCore.Identity.PasswordVerificationResult;
-namespace EmployeeCore.Services
+namespace Employee.Service.Services
 {
     public class AuthService : IAuthService
     {

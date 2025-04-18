@@ -1,4 +1,4 @@
-﻿using EmpInfrastructure.Models;
+﻿using Employee.Repository.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using System.Collections.Generic;
